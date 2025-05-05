@@ -38,10 +38,6 @@ Route::get('/produk/all', [ProdukController::class, 'produkAll'])->name('produk.
 Route::get('/auth/redirect', [CustomerController::class, 'redirect'])->name('auth.redirect');
 Route::get('/auth/google/callback', [CustomerController::class, 'callback'])->name('auth.callback');
 
-// Route untuk menampilkan halaman akun customer 
-// Route::get('/customer/akun/{id}', [CustomerController::class, 'akun'])->name('customer.akun')->middleware('is.customer'); 
-// Route::put('/customer/akun/{id}/update', [CustomerController::class, 'updateAkun'])->name('customer.akun.update')->middleware('is.customer'); 
-
 // Group route untuk customer 
 Route::middleware('is.customer')->group(function () {
     // Route untuk menampilkan halaman akun customer 
