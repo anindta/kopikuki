@@ -7,6 +7,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RajaOngkirController;
 
 Route::get('/', function () {
     // return view('welcome'); 
@@ -48,6 +49,22 @@ Route::middleware('is.customer')->group(function () {
     Route::post('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('order.addToCart');
     Route::get('cart', [OrderController::class, 'viewCart'])->name('order.cart');
 });
+Route::get('/search-destination-rajaongkir', function () { 
+    $response = \Illuminate\Support\Facades\Http::withHeaders([ 
+    'key' => env('')
+    ])->get('https://jsonplaceholder.typicode.com/posts'); //ganti 'province' atau 'city' 
+    dd($response->json()); 
+});
+
+
+//raja ongkir 
+Route::get('/cek-ongkir', function () { 
+    return view('ongkir'); 
+}); 
+ 
+Route::get('/provinces', [RajaOngkirController::class, 'getProvinces']); 
+Route::get('/cities', [RajaOngkirController::class, 'getCities']); 
+Route::post('/cost', [RajaOngkirController::class, 'getCost']); 
 
 
 // Logout 
